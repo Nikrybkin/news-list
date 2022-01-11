@@ -37,7 +37,7 @@
 <style scoped>
   .post {
     width: 520px;
-    height: auto;
+    height: 228px;
     margin-top: 20px;
     padding: 30px;
     background: #fff;
