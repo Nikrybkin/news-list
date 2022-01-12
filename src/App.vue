@@ -4,14 +4,10 @@
       :searchQuery="searchQuery"
       @input="searchQuery = $event.target.value"
     />
-    <div class="filter">
-      <button class="button__filter margin" @click="postsDisplayFalse">
-        <icon-image-false :postsDisplay="postsDisplay"></icon-image-false>
-      </button>
-      <button class="button__filter" @click="postsDisplayTrue">
-        <icon-image-true :postsDisplay="postsDisplay"></icon-image-true>
-      </button>
-    </div>
+    <post-filter
+      v-model:value="postsDisplay"
+      @click="setPostsImagesShowStatus(postsDisplay)"
+    ></post-filter>
     <post-list :posts="itemsVisible" :postsDisplay="postsDisplay" />
     <div class="pagination">
       <button
@@ -28,33 +24,28 @@
 </template>
 
 <script>
+  import axios from "axios";
   import HeaderSearch from "./components/HeaderSearch.vue";
   import PostList from "./components/PostList.vue";
-  import IconImageFalse from "./components/icons/IconImageFalse.vue";
-  import IconImageTrue from "./components/icons/IconImageTrue.vue";
-  import axios from "axios";
+  import PostFilter from "./components/PostFilter.vue";
   export default {
-    components: { HeaderSearch, PostList, IconImageFalse, IconImageTrue },
+    components: { HeaderSearch, PostList, PostFilter },
     data() {
       return {
         posts: [],
         searchQuery: "",
         postsDisplay: false,
         page: 1,
+        currentPage: 1,
         limit: {
           grid: 4,
           list: 3,
         },
-        currentPage: 1,
-        totalPages: 0,
       };
     },
     methods: {
-      postsDisplayTrue() {
-        this.postsDisplay = true;
-      },
-      postsDisplayFalse() {
-        this.postsDisplay = false;
+      setPostsImagesShowStatus(value) {
+        this.postsDisplay = value;
       },
       changePage(selectedPage) {
         this.currentPage = selectedPage;
@@ -69,34 +60,18 @@
           alert("Error");
         }
       },
-      async fetchPostsImage() {
-        try {
-          const response = await axios.get(
-            "https://jsonplaceholder.typicode.com/posts"
-          );
-          this.posts = response.data;
-        } catch (e) {
-          alert("Error");
-        }
-      },
     },
     computed: {
-      checkPostsDisplay() {
-        if (this.postsDisplay) {
-          this.totalPages = Math.ceil(
-            this.searchPosts.length / this.limit.list
-          );
-        } else {
-          this.totalPages = Math.ceil(
-            this.searchPosts.length / this.limit.grid
-          );
-        }
-      },
       searchPosts() {
         this.currentPage = 1;
         return this.posts.filter((post) =>
           post.title.toLowerCase().includes(this.searchQuery.toLowerCase())
         );
+      },
+      totalPages() {
+        return !this.postsDisplay
+          ? Math.ceil(this.searchPosts.length / this.limit.grid)
+          : Math.ceil(this.searchPosts.length / this.limit.list);
       },
       itemsVisible() {
         if (this.postsDisplay) {
@@ -114,7 +89,6 @@
     },
     mounted() {
       this.fetchPosts();
-      // this.searchQuery;
     },
   };
 </script>
@@ -137,49 +111,5 @@
   .app {
     max-width: 1060px;
     margin: 0 auto;
-  }
-
-  /* Filter */
-
-  .filter {
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  .button__filter {
-    border: none;
-    background: none;
-  }
-
-  .button__filter.margin {
-    margin-right: 10px;
-  }
-
-  .pagination {
-    text-align: center;
-    margin-top: 50px;
-  }
-
-  .page {
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: 700;
-    padding: 5px 10px;
-    border-radius: 3px;
-    border: none;
-    background: none;
-    transition: all 0.2s linear;
-  }
-
-  .page:hover {
-    background: rgba(0, 0, 0, 0.1);
-  }
-
-  .current-page {
-    color: #0029ff;
-  }
-
-  .current-page:hover {
-    background: rgba(0, 41, 255, 0.1);
   }
 </style>

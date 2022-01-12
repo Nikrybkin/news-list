@@ -1,5 +1,5 @@
 <template>
-  <span v-if="!postsDisplay">
+  <span v-if="!value">
     <svg
       width="18"
       height="18"
@@ -26,7 +26,7 @@
 <script>
   export default {
     props: {
-      postsDisplay: {
+      value: {
         type: Boolean,
         default: false,
       },
