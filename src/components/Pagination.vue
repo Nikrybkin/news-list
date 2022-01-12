@@ -37,4 +37,24 @@
     margin-top: 50px;
     text-align: center;
   }
+
+  .page {
+    width: 29px;
+    height: 29px;
+    margin: 0 5px;
+    background: none;
+    border: none;
+    border-radius: 3px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .page:hover {
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  .current-page {
+    color: #0029ff;
+  }
 </style>

@@ -37,7 +37,7 @@
 <style scoped>
   .post {
     width: 520px;
-    height: 228px;
+    height: 218px;
     margin-top: 20px;
     padding: 30px;
     background: #fff;
@@ -70,6 +70,11 @@
   }
 
   .post__body {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
     margin: 25px 0;
   }
 
