@@ -9,17 +9,11 @@
       @click="setPostsImagesShowStatus(postsDisplay)"
     ></post-filter>
     <post-list :posts="itemsVisible" :postsDisplay="postsDisplay" />
-    <div class="pagination">
-      <button
-        class="page"
-        v-for="selectedPage in totalPages"
-        :key="selectedPage"
-        :class="{ 'current-page': currentPage === selectedPage }"
-        @click="changePage(selectedPage)"
-      >
-        {{ selectedPage }}
-      </button>
-    </div>
+    <pagination
+      :totalPages="totalPages"
+      v-model:currentPage="currentPage"
+      @click="changePage(currentPage)"
+    />
   </div>
 </template>
 
@@ -28,8 +22,9 @@
   import HeaderSearch from "./components/HeaderSearch.vue";
   import PostList from "./components/PostList.vue";
   import PostFilter from "./components/PostFilter.vue";
+  import Pagination from "./components/Pagination.vue";
   export default {
-    components: { HeaderSearch, PostList, PostFilter },
+    components: { HeaderSearch, PostList, PostFilter, Pagination },
     data() {
       return {
         posts: [],
