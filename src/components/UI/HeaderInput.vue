@@ -25,4 +25,10 @@
     background: #fff;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05);
   }
+
+  @media (max-width: 800px) {
+    .header__input {
+      width: 100%;
+    }
+  }
 </style>

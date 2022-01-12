@@ -44,4 +44,13 @@
     position: absolute;
     right: 13px;
   }
+
+  @media (max-width: 800px) {
+    .header__title {
+      margin-bottom: 20px;
+    }
+    .header__inner {
+      display: block;
+    }
+  }
 </style>

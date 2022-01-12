@@ -1,19 +1,22 @@
 <template>
   <div class="app">
-    <header-search
-      :searchQuery="searchQuery"
-      @input="searchQuery = $event.target.value"
-    />
-    <post-filter
-      v-model:value="postsDisplay"
-      @click="setPostsImagesShowStatus(postsDisplay)"
-    ></post-filter>
-    <post-list :posts="itemsVisible" :postsDisplay="postsDisplay" />
-    <pagination
-      :totalPages="totalPages"
-      v-model:currentPage="currentPage"
-      @click="changePage(currentPage)"
-    />
+    <div class="app__inner">
+      <header-search
+        :searchQuery="searchQuery"
+        @input="searchQuery = $event.target.value"
+      />
+      <hr />
+      <post-filter
+        v-model:value="postsDisplay"
+        @click="setPostsImagesShowStatus(postsDisplay)"
+      ></post-filter>
+      <post-list :posts="itemsVisible" :postsDisplay="postsDisplay" />
+      <pagination
+        :totalPages="totalPages"
+        v-model:currentPage="currentPage"
+        @click="changePage(currentPage)"
+      />
+    </div>
   </div>
 </template>
 
@@ -106,5 +109,14 @@
   .app {
     max-width: 1060px;
     margin: 0 auto;
+  }
+
+  .app__inner {
+    margin: 0 20px;
+  }
+
+  hr {
+    background: #e5e5e5;
+    border: 1px solid #e5e5e5;
   }
 </style>

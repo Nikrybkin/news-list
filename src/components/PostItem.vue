@@ -8,7 +8,7 @@
   </div>
   <div v-else class="post width">
     <div class="post__image">
-      <img src="http://dummyimage.com/200x100/c0c0c0" />
+      <img class="img" src="http://dummyimage.com/200x100/c0c0c0" />
     </div>
     <div class="post__content width">
       <div class="post__title">
@@ -36,7 +36,7 @@
 
 <style scoped>
   .post {
-    width: 520px;
+    width: 49%;
     height: 218px;
     margin-top: 20px;
     padding: 30px;
@@ -57,12 +57,18 @@
   }
 
   .post__title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
     height: 42px;
     font-family: inherit;
     font-weight: 700;
     font-size: 18px;
     line-height: 22px;
     color: #0029ff;
+    margin-bottom: 20px;
   }
 
   .post__title a {
@@ -84,5 +90,29 @@
 
   .post__link {
     color: #0029ff;
+  }
+
+  @media (max-width: 800px) {
+    .post {
+      width: 100%;
+    }
+
+    .post.width {
+      display: block;
+      text-align: center;
+    }
+
+    .post__image {
+      margin-bottom: 20px;
+    }
+
+    .img {
+      width: 100%;
+      height: 100px;
+    }
+
+    .post__content.width {
+      margin-left: 0;
+    }
   }
 </style>

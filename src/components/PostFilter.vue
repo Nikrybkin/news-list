@@ -37,6 +37,7 @@
   .filter {
     display: flex;
     justify-content: flex-end;
+    margin: 20px 0 0;
   }
 
   .button__filter {
