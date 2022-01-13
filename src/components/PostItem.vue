@@ -3,7 +3,9 @@
     <div class="post__content">
       <div class="post__title">{{ post.title }}</div>
       <div class="post__body">{{ post.body }}</div>
-      <a class="post__link" href="#">Подробнее</a>
+      <a @click="$router.push(`/posts/${post.id}`)" class="post__link" href="#"
+        >Подробнее</a
+      >
     </div>
   </div>
   <div v-else class="post width">
@@ -12,7 +14,9 @@
     </div>
     <div class="post__content width">
       <div class="post__title">
-        <a href="">{{ post.title }}</a>
+        <a @click="$router.push(`/posts/${post.id}`)" href="">{{
+          post.title
+        }}</a>
       </div>
       <div class="post__body width">{{ post.body }}</div>
     </div>
